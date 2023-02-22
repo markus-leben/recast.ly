@@ -6,11 +6,15 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "test": "live-server --open=./SpecRunner.html --port=8081"
+    "start": "run-s tab:babel tab:test open:index",
+    "tab:babel": "ttab -t 'Babel transpiler' npm run babel",
+    "babel": "babel . --out-dir=compiled --presets=@babel/preset-react --ignore=node_modules,compiled --source-maps=inline --watch",
+    "tab:test": "ttab -t 'Test Server' npm test",
+    "test": "live-server --open=./SpecRunner.html --port=8081",
+    "open:index": "open 'http://127.0.0.1:8081/index.html'"
   },
   "dependencies": {
     "bootstrap": "^4.5.3",
-    "jquery": "^3.5.1 ",
     "lodash": "^4.17.20",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
@@ -23,7 +27,9 @@
     "chai": "^4.2.0",
     "live-server": "^1.2.1",
     "mocha": "^8.2.1",
+    "npm-run-all": "^4.1.5",
     "react-test-renderer": "^16.14.0",
-    "sinon": "^9.2.1"
+    "sinon": "^9.2.1",
+    "ttab": "^0.8.0"
   }
 }
